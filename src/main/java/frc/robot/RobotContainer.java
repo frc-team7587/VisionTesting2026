@@ -21,12 +21,19 @@ import edu.wpi.first.wpilibj2.command.Subsystem.*;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
+import frc.robot.simulation.Mech2DSim;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIONavX;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOSpark;
+import frc.robot.subsystems.shooter.Shooter;
+import frc.robot.subsystems.shooter.ShooterIO;
+import frc.robot.subsystems.shooter.ShooterIOSim;
+import frc.robot.subsystems.shooter.ShooterIOSpark;
+import frc.robot.subsystems.shooter.ShooterState.InputState;
+import frc.robot.subsystems.shooter.ShooterState.OutputState;
 import frc.robot.subsystems.vision.Vision;
 import frc.robot.subsystems.vision.VisionIO;
 import frc.robot.subsystems.vision.VisionIOLimelight;
@@ -44,6 +51,10 @@ public class RobotContainer {
   // subsystems
   private final Vision vision;
   private final Drive drive;
+  private final Shooter shooter;
+
+  // mechanism simulator
+  public final Mech2DSim mech2DSim;
 
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
@@ -71,6 +82,9 @@ public class RobotContainer {
             new Vision(
                 drive::addVisionMeasurement,
                 new VisionIOLimelight(camera0Name, drive::getRotation));
+        shooter = new Shooter(new ShooterIOSpark());
+        mech2DSim = new Mech2DSim(shooter);
+
         // vision =
         // new Vision(
         // demoDrive::addVisionMeasurement,
@@ -91,6 +105,8 @@ public class RobotContainer {
             new Vision(
                 drive::addVisionMeasurement,
                 new VisionIOPhotonVisionSim(camera0Name, robotToCamera0, drive::getPose));
+        shooter = new Shooter(new ShooterIOSim());
+        mech2DSim = new Mech2DSim(shooter);
         break;
 
       default:
@@ -104,6 +120,23 @@ public class RobotContainer {
                 new ModuleIO() {},
                 new ModuleIO() {});
         vision = new Vision(drive::addVisionMeasurement, new VisionIO() {}, new VisionIO() {});
+        shooter =
+            new Shooter(
+                new ShooterIO() {
+
+                  @Override
+                  public InputState getPosition() {
+                    // TODO Auto-generated method stub
+                    throw new UnsupportedOperationException("Unimplemented method 'getPosition'");
+                  }
+
+                  @Override
+                  public void setPosition(OutputState output) {
+                    // TODO Auto-generated method stub
+                    throw new UnsupportedOperationException("Unimplemented method 'setPosition'");
+                  }
+                });
+        mech2DSim = new Mech2DSim(shooter);
         break;
     }
     // Set up auto routines

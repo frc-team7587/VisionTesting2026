@@ -19,20 +19,26 @@ public class ShooterIOSim implements ShooterIO {
           0);
 
   @Override
-  public ShooterState.InputState getPosition() {
-    armSim.update(0.02); // Update simulation with 20ms timestep
-    return new ShooterState.InputState(
-        Units.radiansToDegrees(armSim.getAngleRads()),
-        Units.radiansToDegrees(armSim.getVelocityRadPerSec()));
+  public void setPivotSpeed(double speed) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'setPivotSpeed'");
   }
 
   @Override
-  public void setPosition(ShooterState.OutputState output) {
-    output
-        .voltage()
-        .ifPresent(
-            (volts) -> {
-              armSim.setInputVoltage(volts);
-            });
+  public void setPivotPosition(double position) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'setPivotPosition'");
+  }
+
+  @Override
+  public double getPivotPosition() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getPivotPosition'");
+  }
+
+  @Override
+  public void reset() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'reset'");
   }
 }

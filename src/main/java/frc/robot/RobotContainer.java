@@ -134,8 +134,7 @@ public class RobotContainer {
                   public void setPosition(OutputState output) {
                     // TODO Auto-generated method stub
                     throw new UnsupportedOperationException("Unimplemented method 'setPosition'");
-                  }
-                });
+                  }});
         mech2DSim = new Mech2DSim(shooter);
         break;
     }
@@ -237,6 +236,7 @@ public class RobotContainer {
                   drive.run(0.0, aimController.calculate(vision.getTargetX(0).getRadians()));
                 },
                 drive));
+    controller.y().whileTrue(shooter.setArmPosition(45));
 
     // controller.rightTrigger().whileTrue(drive.alignToCenterReef());
   }

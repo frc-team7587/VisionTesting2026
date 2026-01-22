@@ -45,18 +45,21 @@ public class ShooterIOSpark implements ShooterIO {
         pivotConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 
+  
   @Override
-  public InputState getPosition() {
-    return new InputState(pivotEncoder.getPosition(), pivotEncoder.getVelocity());
+  public void setPivotSpeed(double speed){ 
+      pivotSpark.set(speed);
   }
-
   @Override
-  public void setPosition(OutputState output) {
-    output
-        .voltage()
-        .ifPresent(
-            (volts) -> {
-              pivotController.setSetpoint(volts, ControlType.kVoltage);
-            });
+  public void setPivotPosition(double position){
+      pivotController.setReference(position, ControlType.kPosition);
+  }
+  @Override
+  public double getPivotPosition(){
+      return pivotEncoder.getPosition();
+  }
+  @Override
+  public void reset(){
+      pivotEncoder.setPosition(0);
   }
 }

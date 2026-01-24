@@ -4,10 +4,9 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismRoot2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color8Bit;
 import frc.robot.subsystems.shooter.Shooter;
-import frc.robot.subsystems.shooter.ShooterState;
+// import frc.robot.subsystems.shooter.ShooterState;
 import org.littletonrobotics.junction.mechanism.*;
 
 public class Mech2DSim {
@@ -27,12 +26,5 @@ public class Mech2DSim {
             new MechanismLigament2d("arm", Units.inchesToMeters(5), 0, 6, new Color8Bit()));
   }
 
-  public void periodic() {
-    ShooterState.InputState state = shooter.getCurrentState();
-    if (state != null) {
-      this.arm.setAngle(state.currentAngleeDeg());
-    }
-    // Logger.getInstance()recordOutput("Mech2DSim/Mech2d", panel);
-    SmartDashboard.putData("Mech2d", panel);
-  }
+  public void periodic() {}
 }

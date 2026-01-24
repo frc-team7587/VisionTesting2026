@@ -32,8 +32,6 @@ import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.shooter.ShooterIO;
 import frc.robot.subsystems.shooter.ShooterIOSim;
 import frc.robot.subsystems.shooter.ShooterIOSpark;
-import frc.robot.subsystems.shooter.ShooterState.InputState;
-import frc.robot.subsystems.shooter.ShooterState.OutputState;
 import frc.robot.subsystems.vision.Vision;
 import frc.robot.subsystems.vision.VisionIO;
 import frc.robot.subsystems.vision.VisionIOLimelight;
@@ -120,21 +118,7 @@ public class RobotContainer {
                 new ModuleIO() {},
                 new ModuleIO() {});
         vision = new Vision(drive::addVisionMeasurement, new VisionIO() {}, new VisionIO() {});
-        shooter =
-            new Shooter(
-                new ShooterIO() {
-
-                  @Override
-                  public InputState getPosition() {
-                    // TODO Auto-generated method stub
-                    throw new UnsupportedOperationException("Unimplemented method 'getPosition'");
-                  }
-
-                  @Override
-                  public void setPosition(OutputState output) {
-                    // TODO Auto-generated method stub
-                    throw new UnsupportedOperationException("Unimplemented method 'setPosition'");
-                  }});
+        shooter = new Shooter(new ShooterIO() {});
         mech2DSim = new Mech2DSim(shooter);
         break;
     }
@@ -236,7 +220,7 @@ public class RobotContainer {
                   drive.run(0.0, aimController.calculate(vision.getTargetX(0).getRadians()));
                 },
                 drive));
-    controller.y().whileTrue(shooter.setArmPosition(45));
+    // controller.y().whileTrue(shooter.setArmPosition(45));
 
     // controller.rightTrigger().whileTrue(drive.alignToCenterReef());
   }

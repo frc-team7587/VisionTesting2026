@@ -1,28 +1,129 @@
 package frc.robot.subsystems.shooter;
 
+import org.littletonrobotics.junction.AutoLog;
+
 public interface ShooterIO {
-  //public ShooterState.InputState getPosition();
+  // public ShooterState.InputState getPosition();
+  @AutoLog
+  public static class ShooterPivotIOInputs {
+    public double angleRads = 0.0;
+    public double angVelocityRadsPerSec = 0.0;
+    public double appliedVolts = 0.0;
+    public double setpointAngleRads = 0.0;
+    public boolean breakBeamBroken = false;
 
-      /**
-     * Sets the speed of the pivot motor.
-     * @param speed The speed to set the pivot motor to.
-     */
-    public void setPivotSpeed(double speed);
+    public double[] currentAmps = new double[] {};
+    public double[] tempCelsius = new double[] {};
+  }
 
-    /**
-     * Sets the position of the pivot motor.
-     * @param position The position to set the pivot motor to.
-     */
-    public void setPivotPosition(double position);
+  /** Updates the set of loggable inputs. */
+  public default void updateInputs(ShooterPivotIOInputs inputs) {}
 
-    /**
-     * Gets the encoder value of the pivot motor.
-     * @return The encoder value of the pivot motor.
-     */
-    public double getPivotPosition();
+  /** Run open loop at the specified voltage. */
+  public default void setVoltage(double motorVolts) {}
 
-    /**
-     * Resets the encoder value of the pivot motor.
-     */
-    public void reset();
+  /** Returns the current distance measurement. */
+  public default double getAngle() {
+    return 0.0;
+  }
+
+  /** Returns the angular velocity of the arm in radians per second */
+  public default double getAngVelocity() {
+    return 0.0;
+  }
+
+  public default void setSetpoint(double setpoint) {}
+
+  /** Go to Setpoint */
+  public default void goToSetpoint() {}
+
+  public default void setBrake(boolean brake) {}
+
+  public default boolean atSetpoint() {
+    return false;
+  }
+
+  public default void setP(double p) {}
+
+  public default void setI(double i) {}
+
+  public default void setD(double d) {}
+
+  public default void setkS(double kS) {}
+
+  public default void setkV(double kV) {}
+
+  public default void setkG(double kG) {}
+
+  public default void setkA(double kA) {}
+
+  public default void setActiveP(double p) {}
+
+  public default void setActiveI(double i) {}
+
+  public default void setActiveD(double d) {}
+
+  public default void setActivekS(double kS) {}
+
+  public default void setActivekV(double kV) {}
+
+  public default void setActivekG(double kG) {}
+
+  public default void setActivekA(double kA) {}
+
+  public default double getP() {
+    return 0.0;
+  }
+
+  public default double getI() {
+    return 0.0;
+  }
+
+  public default double getD() {
+    return 0.0;
+  }
+
+  public default double getkS() {
+    return 0.0;
+  }
+
+  public default double getkG() {
+    return 0.0;
+  }
+
+  public default double getkV() {
+    return 0.0;
+  }
+
+  public default double getkA() {
+    return 0.0;
+  }
+
+  public default double getActiveP() {
+    return 0.0;
+  }
+
+  public default double getActiveI() {
+    return 0.0;
+  }
+
+  public default double getActiveD() {
+    return 0.0;
+  }
+
+  public default double getActivekS() {
+    return 0.0;
+  }
+
+  public default double getActivekG() {
+    return 0.0;
+  }
+
+  public default double getActivekV() {
+    return 0.0;
+  }
+
+  public default double getActivekA() {
+    return 0.0;
+  }
 }

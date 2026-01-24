@@ -20,7 +20,7 @@ public class DriveConstants {
   public static final double alignRotationTolerance = Units.degreesToRadians(3); // radians
   public static final double alignPositionTolerance = 0.03; // meters
 
-  public static final double maxSpeedMetersPerSec = 4.8;
+  public static final double maxSpeedMetersPerSec = 7; // 4.8 max
   public static final double odometryFrequency = 100.0; // Hz
   public static final double trackWidth = Units.inchesToMeters(26.5);
   public static final double wheelBase = Units.inchesToMeters(26.5);
